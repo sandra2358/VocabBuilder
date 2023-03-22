@@ -34,6 +34,22 @@ public class Word {
 	@Enumerated(EnumType.STRING)
 	private PartOfSpeech partOfSpeech;
 
+	
+	public void addMeaningToWord(Meaning meaning) {
+		this.meanings.add(meaning);
+	}
+	
+	public void removeMeaningFromWord(Meaning meaning) {
+		this.meanings.remove(meaning);
+	}
+	
+	
+	// Constructors
+	public Word() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Word(String article, String word){
 		this.article = article;
 		this.word = word;
@@ -48,6 +64,8 @@ public class Word {
 	    this.partOfSpeech = partOfSpeech;
 	}
 
+	
+	// Getters and Setters
 	public long getWordID() {
 		return wordID;
 	}

@@ -8,4 +8,6 @@ import com.sandrayang.vocabbuilderspringboot.model.Meaning;
 @Repository
 public interface MeaningRepo extends JpaRepository<Meaning,Long>{
 
+	
+
 }

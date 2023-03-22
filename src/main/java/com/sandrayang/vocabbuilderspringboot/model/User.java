@@ -17,7 +17,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userID;
 //	@NonNull
-	@Column(unique=true)
+//	@Column(unique=true)
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -34,13 +34,27 @@ public class User {
 	@JoinColumn(name="listID")
 	private Set<Lists> createdList = new HashSet<Lists>();
 	  
+	public void addCreatedList(Lists list) {
+		this.createdList.add(list);
+	}
 	
+	public void removeCreatedList(Lists list) {
+		this.createdList.remove(list);
+	}
+	
+	public void addSubscribedList(Lists list) {
+		this.subscribedList.add(list);
+	}
+	
+	public void removeSubscrtibedList(Lists list) {
+		this.subscribedList.remove(list);
+	}
+	
+	// Constructors
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	public User(String username, String firstName, String lastName) {
 		super();
@@ -50,7 +64,7 @@ public class User {
 	}
 
 
-
+	// Getters and Setters
 	public long getUserID() {
 		return userID;
 	}
@@ -98,14 +112,15 @@ public class User {
 	public void setCreatedList(Set<Lists> createdList) {
 		this.createdList = createdList;
 	}
-//	
-//	public List<Lists> getSubscribedList() {
-//		return subscribedList;
-//	}
-//	
-//	public void setSubscribedList(List<Lists> subscribedList) {
-//		this.subscribedList = subscribedList;
-//	}
+
+	public Set<Lists> getSubscribedList() {
+		return subscribedList;
+	}
+
+	public void setSubscribedList(Set<Lists> subscribedList) {
+		this.subscribedList = subscribedList;
+	}
+
 	
 	
 }

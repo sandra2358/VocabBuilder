@@ -35,23 +35,19 @@ public class Lists {
 	@UpdateTimestamp
 	private Date updatedDate;
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private long listID;
-	
 	@ManyToOne
 	@JoinColumn(name="creatorID")
 //	@NonNull
 	private User creator;
-//	
-//	@OneToMany(mappedBy = "list")
-//	private List<Word> wordList = new ArrayList<Word>();
-//	
-////	@NonNull
-//	private LocalDate creationDate;
-////	@NonNull
-//	private LocalDate updatedDate;
-
+	
+	public void addWordToList(Word word) {
+		this.words.add(word);
+	}
+	
+	public void removeWordFromList(Word word) {
+		this.words.remove(word);
+	}
+	
 	public Lists() {
 		super();
 		// TODO Auto-generated constructor stub

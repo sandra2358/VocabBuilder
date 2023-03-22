@@ -2,6 +2,7 @@ package com.sandrayang.vocabbuilderspringboot.service;
 
 import java.util.Set;
 
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,19 @@ public class MeaningService {
 	
 	@Autowired
 	MeaningRepo meaningRepo;
-	@Autowired
-	WordService wordService;
 	  
 	public void addMeaning(Meaning meaning, Word word){
-	  meaningRepo.save(meaning);
-	  Set<Word> words = meaning.getWords();
-	  words.add(word);
-	  meaning.setWords(words);
-	  wordService.addMeaningToWord(meaning, word);
+		try {
+			meaningRepo.save(meaning);
+			meaning.addWordToMeaning(word);
+			word.addMeaningToWord(meaning);
+		}
+		catch(Exception e){};
 	}
-
+	
+	public void deleteMeaning(Meaning meaning) {
+		meaning.getWords().forEach(word -> word.removeMeaningFromWord(meaning));
+		meaningRepo.delete(meaning);
+		
+	}
 }

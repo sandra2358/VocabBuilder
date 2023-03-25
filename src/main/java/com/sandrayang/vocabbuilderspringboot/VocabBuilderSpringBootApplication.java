@@ -7,7 +7,7 @@ import com.sandrayang.vocabbuilderspringboot.model.Lists;
 import com.sandrayang.vocabbuilderspringboot.model.User;
 import com.sandrayang.vocabbuilderspringboot.model.Word;
 
-// password: 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
+// password: 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
 @SpringBootApplication
 public class VocabBuilderSpringBootApplication {
 

@@ -1,5 +1,6 @@
 package com.sandrayang.vocabbuilderspringboot.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -64,4 +65,10 @@ public class ListsService {
 	    	}
 	    }
 	}
+	
+	public List<Word> findSameWord(String word){
+		return listsRepo.findSameWord(word);
+	}
+	
+	
 }

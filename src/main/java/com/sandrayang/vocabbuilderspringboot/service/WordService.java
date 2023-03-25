@@ -40,4 +40,16 @@ public class WordService {
 		return word.getMeanings();
 	}
 	
+	public boolean updateWord (Word oldWord, Word newWord) {
+		if (oldWord.equals(newWord)) {
+			return false;
+		} else {
+			if (oldWord.getList().size() == 1) {
+				oldWord.setArticle(newWord.getArticle());
+			}
+			
+			return true;
+		}
+		
+	}
 }

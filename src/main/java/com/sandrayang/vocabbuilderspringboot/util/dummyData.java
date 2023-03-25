@@ -1,4 +1,6 @@
 package com.sandrayang.vocabbuilderspringboot.util;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -40,35 +42,43 @@ public class dummyData implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-//		User user1 = new User("Sandra2358","Sandra","Yang");
-//	    User user2 = new User("SpiderMan","Tom","Holland");
-//	    User user3  = new User("Captain America","Chris","Evans");
-//	    Lists list1 = new Lists("B1",user1);
-//	    Lists list2 = new Lists("A1",user1);
-//	    Word word1 = new Word("die","Schokolade");
-//	    Word word2 = new Word("laufen");
-//	    Word word3 = new Word("duschen",PartOfSpeech.Verb);
-//	    Meaning meaning11 = new Meaning("susses Nachtisch aus Kako", "Ich esse gern Schokolade. Nach ich schokolade essen, bin ich glucklish.");
-//	    Meaning meaning12 = new Meaning("Essen, das ich mag");
-//	    Meaning meaning21 = new Meaning("run","Wenn ich spat zu  Arbeit bin, laufe ich.");
-//	    
-//
-//	    userService.addUser(user1);
-//	    userService.addUser(user2);
-//	    userService.addUser(user3);
-//	    listsService.addList(list1);
-//	    listsService.addList(list2);
-//	    userService.subscribeList(list1, user2);
-//	    userService.subscribeList(list2, user2);
-//	    userService.subscribeList(list1, user3);
-//	    wordService.addWord(word1,list1);
-//	    wordService.addWord(word2,list1);
-//	    wordService.addWord(word3,list1);
-//	    wordService.addWord(word2,list2);
-//	    meaningService.addMeaning(meaning11,word1);
-//	    meaningService.addMeaning(meaning12,word1);
-//	    meaningService.addMeaning(meaning21,word2);
-//	    listsService.deleteWordFromList(word3,list1);
+		User user1 = new User("sandra.yang@gmail.com","Sandra2358","Sandra","Yang","sandra123");
+	    User user2 = new User("spiderman@gmail.com","SpiderMan","Tom","Holland","tom123");
+	    User user3  = new User("capt@gmail.com","Captain America","Chris","Evans","chris123");
+	    Lists list1 = new Lists("B1",user1);
+	    Lists list2 = new Lists("A1",user1);
+	    Word word1 = new Word("die","Schokolade");
+	    Word word2 = new Word("laufen");
+	    Word word3 = new Word("duschen",PartOfSpeech.Verb);
+	    Meaning meaning11 = new Meaning("susses Nachtisch aus Kako", "Ich esse gern Schokolade. Nach ich schokolade essen, bin ich glucklish.");
+	    Meaning meaning12 = new Meaning("Essen, das ich mag");
+	    Meaning meaning21 = new Meaning("run","Wenn ich spat zu  Arbeit bin, laufe ich.");
+	    
+
+	    userService.addUser(user1);
+	    userService.addUser(user2);
+	    userService.addUser(user3);
+	    listsService.addList(list1);
+	    listsService.addList(list2);
+	    userService.subscribeList(list1, user2);
+	    userService.subscribeList(list2, user2);
+	    userService.subscribeList(list1, user3);
+	    wordService.addWord(word1,list1);
+	    wordService.addWord(word2,list1);
+	    wordService.addWord(word3,list1);
+	    wordService.addWord(word2,list2);
+	    meaningService.addMeaning(meaning11,word1);
+	    meaningService.addMeaning(meaning12,word1);
+	    meaningService.addMeaning(meaning21,word2);
+	    listsService.deleteWordFromList(word3,list1);
+	
+		try {
+			Optional<Lists> listOp = listsRepo.findByListID(1);
+		}catch (Exception e) {
+			System.out.println("failed to get optional");
+		}
+		System.out.println(listsService.findSameWord("laufen").get(0));
+			
 	}
 
 }

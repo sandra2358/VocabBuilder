@@ -14,6 +14,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	@Id
@@ -42,7 +44,7 @@ public class User {
 	private String password;
 	
 	@OneToMany
-	@JoinColumn(name="listID")
+	@JoinColumn(name="subscribedList")
 	private Set<Lists> subscribedList = new HashSet<Lists>();
 	
 	@OneToMany

@@ -47,6 +47,7 @@ public class dummyData implements CommandLineRunner{
 	    User user3  = new User("capt@gmail.com","Captain America","Chris","Evans","chris123");
 	    Lists list1 = new Lists("B1",user1);
 	    Lists list2 = new Lists("A1",user1);
+	    Lists list3 = new Lists("A2",user1);
 	    Word word1 = new Word("die","Schokolade");
 	    Word word2 = new Word("laufen");
 	    Word word3 = new Word("duschen",PartOfSpeech.Verb);
@@ -59,26 +60,24 @@ public class dummyData implements CommandLineRunner{
 	    userService.addUser(user2);
 	    userService.addUser(user3);
 	    listsService.addList(list1);
-	    listsService.addList(list2);
-	    userService.subscribeList(list1, user2);
-	    userService.subscribeList(list2, user2);
-	    userService.subscribeList(list1, user3);
-	    wordService.addWord(word1,list1);
-	    wordService.addWord(word2,list1);
-	    wordService.addWord(word3,list1);
-	    wordService.addWord(word2,list2);
-	    meaningService.addMeaning(meaning11,word1);
-	    meaningService.addMeaning(meaning12,word1);
-	    meaningService.addMeaning(meaning21,word2);
-	    listsService.deleteWordFromList(word3,list1);
+//	    listsService.addList(list2);
+//	    listsService.addList(list3);
+//	    userService.subscribeList(list1, user2);
+//	    userService.subscribeList(list2, user2);
+//	    userService.subscribeList(list1, user3);
+//	    wordService.addWord(word1,list1);
+//	    wordService.addWord(word2,list1);
+//	    wordService.addWord(word3,list1);
+//	    wordService.addWord(word2,list2);
+//	    meaningService.addMeaning(meaning11,word1);
+//	    meaningService.addMeaning(meaning12,word1);
+//	    meaningService.addMeaning(meaning21,word2);
+//	    listsService.deleteWordFromList(word3,list1);
+//	    
+//		Word word21 = new Word ("die","Lauf");
+//		wordService.updateWord(word2, word21,list3);
+		
 	
-		try {
-			Optional<Lists> listOp = listsRepo.findByListID(1);
-		}catch (Exception e) {
-			System.out.println("failed to get optional");
-		}
-		System.out.println(listsService.findSameWord("laufen").get(0));
-			
 	}
 
 }

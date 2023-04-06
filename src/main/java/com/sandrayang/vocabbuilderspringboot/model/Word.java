@@ -1,6 +1,8 @@
 package com.sandrayang.vocabbuilderspringboot.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -26,7 +28,7 @@ public class Word {
 	  
 	@ManyToMany
 	@JoinTable(name="word_meaning", joinColumns = @JoinColumn(name = "wordID"), inverseJoinColumns = @JoinColumn(name="meaningID"))
-	private Set<Meaning> meanings = new HashSet<Meaning>();
+	private List<Meaning> meanings = new ArrayList<Meaning>();
 	
 	private String article; 
 	private String word;
@@ -41,6 +43,14 @@ public class Word {
 	
 	public void removeMeaningFromWord(Meaning meaning) {
 		this.meanings.remove(meaning);
+	}
+	
+	public void addListToWord(Lists list) {
+		this.list.add(list);
+	}
+	
+	public void removeListFromWord(Lists list) {
+		this.list.remove(list);
 	}
 	
 	
@@ -82,11 +92,11 @@ public class Word {
 		this.list = list;
 	}
 
-	public Set<Meaning> getMeanings() {
+	public List<Meaning> getMeanings() {
 		return meanings;
 	}
 
-	public void setMeanings(Set<Meaning> meanings) {
+	public void setMeanings(List<Meaning> meanings) {
 		this.meanings = meanings;
 	}
 

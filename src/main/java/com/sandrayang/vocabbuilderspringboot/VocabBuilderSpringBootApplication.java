@@ -1,11 +1,9 @@
 package com.sandrayang.vocabbuilderspringboot;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.sandrayang.vocabbuilderspringboot.model.Lists;
-import com.sandrayang.vocabbuilderspringboot.model.User;
-import com.sandrayang.vocabbuilderspringboot.model.Word;
+import org.springframework.context.annotation.Bean;
 
 // password: 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
 @SpringBootApplication
@@ -15,4 +13,9 @@ public class VocabBuilderSpringBootApplication {
 		SpringApplication.run(VocabBuilderSpringBootApplication.class, args);
 
 	}
+	
+	@Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }

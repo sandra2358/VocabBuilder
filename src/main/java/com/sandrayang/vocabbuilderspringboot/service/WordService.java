@@ -1,5 +1,6 @@
 package com.sandrayang.vocabbuilderspringboot.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,26 +31,39 @@ public class WordService {
 		// add word to Word
 		wordRepo.save(word);
 		list.addWordToList(word);
+		word.addListToWord(list);
 	};
 	  
 	
 	  
-	public Set<Meaning> findMeanings(long wordID){
+	public List<Meaning> findMeanings(long wordID){
 		Optional<Word> wordOptional= wordRepo.findWordByWordID(wordID);
 		Word word = wordOptional.get();
 		return word.getMeanings();
 	}
 	
-	public boolean updateWord (Word oldWord, Word newWord) {
+	public boolean isSameWord(Word oldWord, Word newWord) {
 		if (oldWord.equals(newWord)) {
-			return false;
-		} else {
-			if (oldWord.getList().size() == 1) {
-				oldWord.setArticle(newWord.getArticle());
-			}
-			
 			return true;
 		}
+		else {
+			return false;
+		}
+	}
+	
+	public Word updateWord (Word oldWord, Word newWord, Lists list) {
+		if (oldWord.getList().size() == 1) {
+			oldWord.setArticle(newWord.getArticle());
+			oldWord.setPartOfSpeech(newWord.getPartOfSpeech());
+			oldWord.setMeanings(newWord.getMeanings());
+			oldWord.setWord(newWord.getWord());
+			wordRepo.save(oldWord);
+		} else if (oldWord.getList().size() > 1) {
+			oldWord.removeListFromWord(list);
+			wordRepo.save(newWord);
+			addWord(newWord,list);
+		}
+		return oldWord;
 		
 	}
 }

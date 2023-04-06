@@ -37,6 +37,16 @@ public class UserService {
 		}
 	}
 	
+	public User findUserByUserID(long UserID) {
+		try {
+			User user = userRepo.findByUserID(UserID).get();
+			return user;
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
+	
 	public boolean verifyCredentials(String username, String password) {
 		
 		Optional<User> userOptional = userRepo.findByUsername(username);
@@ -52,15 +62,38 @@ public class UserService {
 		}
 	}
 	
-	public void subscribeList(Lists list, User user){
-		Set<Lists> subscribedList = user.getSubscribedList();
-		subscribedList.add(list);
-		user.setSubscribedList(subscribedList);
+//	public void subscribeList(Lists list, User user){
+//		Set<Lists> subscribedList = user.getSubscribedList();
+//		subscribedList.add(list);
+//		user.setSubscribedList(subscribedList);
+//	}
+//	
+//	public void unsubscribeList(Lists list, User user){
+//		Set<Lists> subscribedList = user.getSubscribedList();
+//		subscribedList.remove(list);
+//		user.setSubscribedList(subscribedList);
+//	}
+	
+	public void updateProfile(User updatedUser) {
+		User user = userRepo.findById(updatedUser.getUserID()).get();
+		if (user.equals(updatedUser)) {
+		} else {
+		user.setFirstName(updatedUser.getFirstName());
+		user.setLastName(updatedUser.getLastName());
+		user.setUsername(updatedUser.getUsername());
+		userRepo.save(user);
+		}
 	}
 	
-	public void unsubscribeList(Lists list, User user){
-		Set<Lists> subscribedList = user.getSubscribedList();
-		subscribedList.remove(list);
-		user.setSubscribedList(subscribedList);
+	public void updatePassword(User updatedUser) {
+		User user = userRepo.findById(updatedUser.getUserID()).get();
+		if (user.equals(updatedUser)) {}
+		else {
+			int strength = 10;
+			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
+			String newHashPassword = bCryptPasswordEncoder.encode(updatedUser.getPassword());
+			user.setPassword(newHashPassword);
+			userRepo.save(user);
+		}
 	}
 }

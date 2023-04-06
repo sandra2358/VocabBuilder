@@ -33,7 +33,7 @@ public class ListsService {
 	};
 	
 	
-	  
+	
 	public void addList(Lists list){
 		listsRepo.save(list);
 		User creator = list.getCreator();
@@ -54,7 +54,7 @@ public class ListsService {
 	// delete word if the word doesn't exist in other lists
 	public void deleteWordFromList(Word word,Lists list){
 	    list.removeWordFromList(word);
-	    Set<Meaning> meaningList = word.getMeanings();
+	    List<Meaning> meaningList = word.getMeanings();
 	    if (word.getList().size() == 0) {
 	    	wordRepo.delete(word);
 	    }

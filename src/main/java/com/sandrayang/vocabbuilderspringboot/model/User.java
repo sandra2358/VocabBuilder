@@ -5,11 +5,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -41,23 +41,23 @@ public class User {
 
 	@NotBlank(message="Please enter a password")
 	@Pattern(regexp="[\\S]{8,}", message="The password should be at least 8 characters long, space is not accepted")
+	@JsonIgnore
 	private String password;
 	
-	@OneToMany
-	@JoinColumn(name="subscribedList")
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Lists> subscribedList = new HashSet<Lists>();
 	
-	@OneToMany
-	@JoinColumn(name="listID")
-	private Set<Lists> createdList = new HashSet<Lists>();
+//	@OneToMany
+//	@JoinColumn(name="listID")
+//	private Set<Lists> createdList = new HashSet<Lists>();
 	  
-	public void addCreatedList(Lists list) {
-		this.createdList.add(list);
-	}
-	
-	public void removeCreatedList(Lists list) {
-		this.createdList.remove(list);
-	}
+//	public void addCreatedList(Lists list) {
+//		this.createdList.add(list);
+//	}
+//	
+//	public void removeCreatedList(Lists list) {
+//		this.createdList.remove(list);
+//	}
 	
 	public void addSubscribedList(Lists list) {
 		this.subscribedList.add(list);
@@ -124,13 +124,13 @@ public class User {
 		this.password = password;
 	}
 	
-	public Set<Lists> getCreatedList() {
-		return createdList;
-	}
-	
-	public void setCreatedList(Set<Lists> createdList) {
-		this.createdList = createdList;
-	}
+//	public Set<Lists> getCreatedList() {
+//		return createdList;
+//	}
+//	
+//	public void setCreatedList(Set<Lists> createdList) {
+//		this.createdList = createdList;
+//	}
 
 	public Set<Lists> getSubscribedList() {
 		return subscribedList;
@@ -148,6 +148,13 @@ public class User {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userID=" + userID + ", username=" + username + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", subscribedList=" + subscribedList
+				+  "]";
+	}
+	
 	
 	
 }

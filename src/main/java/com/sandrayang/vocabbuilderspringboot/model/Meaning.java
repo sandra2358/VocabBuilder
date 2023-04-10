@@ -1,5 +1,6 @@
 package com.sandrayang.vocabbuilderspringboot.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Meaning {
+public class Meaning implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +20,17 @@ public class Meaning {
 	private String meaning;
 	private String exampleSentence;
 	
-	@ManyToMany(mappedBy="meanings")
-	private Set<Word> words = new HashSet<Word>();
+//	@ManyToMany(mappedBy="meanings")
+//	private Set<Word> words = new HashSet<Word>();
 
 	
-	public void addWordToMeaning(Word word) {
-		this.words.add(word);
-	}
-	
-	public void removeWordFromMeaning(Word word) {
-		this.words.remove(word);
-	}
+//	public void addWordToMeaning(Word word) {
+//		this.words.add(word);
+//	}
+//	
+//	public void removeWordFromMeaning(Word word) {
+//		this.words.remove(word);
+//	}
 	
 	// Constructors
 	public Meaning() {
@@ -66,12 +67,12 @@ public class Meaning {
 		this.meaning = meaning;
 	}
 
-	public Set<Word> getWords() {
-		return words;
-	}
-
-	public void setWords(Set<Word> words) {
-		this.words = words;
-	}
+//	public Set<Word> getWords() {
+//		return words;
+//	}
+//
+//	public void setWords(Set<Word> words) {
+//		this.words = words;
+//	}
 	
 }

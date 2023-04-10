@@ -60,20 +60,20 @@ public class dummyData implements CommandLineRunner{
 	    userService.addUser(user2);
 	    userService.addUser(user3);
 	    listsService.addList(list1);
-//	    listsService.addList(list2);
-//	    listsService.addList(list3);
-//	    userService.subscribeList(list1, user2);
-//	    userService.subscribeList(list2, user2);
-//	    userService.subscribeList(list1, user3);
-//	    wordService.addWord(word1,list1);
-//	    wordService.addWord(word2,list1);
-//	    wordService.addWord(word3,list1);
-//	    wordService.addWord(word2,list2);
-//	    meaningService.addMeaning(meaning11,word1);
-//	    meaningService.addMeaning(meaning12,word1);
-//	    meaningService.addMeaning(meaning21,word2);
+	    listsService.addList(list2);
+	    listsService.addList(list3);
+	    userService.subscribeList(list1, user2);
+	    userService.subscribeList(list2, user2);
+	    userService.subscribeList(list1, user3);
+	    wordService.addWord(word1,list1);
+	    wordService.addWord(word2,list1);
+	    wordService.addWord(word3,list1);
+//	    wordService.addWord(word3,list3);
+	    meaningService.addMeaning(meaning11,word1);
+	    meaningService.addMeaning(meaning12,word1);
+	    meaningService.addMeaning(meaning21,word2);
 //	    listsService.deleteWordFromList(word3,list1);
-//	    
+	    
 //		Word word21 = new Word ("die","Lauf");
 //		wordService.updateWord(word2, word21,list3);
 		

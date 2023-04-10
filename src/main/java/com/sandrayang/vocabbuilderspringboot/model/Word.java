@@ -1,9 +1,8 @@
 package com.sandrayang.vocabbuilderspringboot.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,23 +10,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 
 @Entity
-public class Word {
+public class Word implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long wordID;
 	  
-	@ManyToMany(mappedBy="words")
-	private Set<Lists> list = new HashSet<Lists>();
+//	@ManyToMany(mappedBy="words")
+//	private Set<Lists> list = new HashSet<Lists>();
 	  
-	@ManyToMany
-	@JoinTable(name="word_meaning", joinColumns = @JoinColumn(name = "wordID"), inverseJoinColumns = @JoinColumn(name="meaningID"))
+	@OneToMany
 	private List<Meaning> meanings = new ArrayList<Meaning>();
 	
 	private String article; 
@@ -45,13 +41,13 @@ public class Word {
 		this.meanings.remove(meaning);
 	}
 	
-	public void addListToWord(Lists list) {
-		this.list.add(list);
-	}
-	
-	public void removeListFromWord(Lists list) {
-		this.list.remove(list);
-	}
+//	public void addListToWord(Lists list) {
+//		this.list.add(list);
+//	}
+//	
+//	public void removeListFromWord(Lists list) {
+//		this.list.remove(list);
+//	}
 	
 	
 	// Constructors
@@ -84,13 +80,13 @@ public class Word {
 		this.wordID = wordID;
 	}
 
-	public Set<Lists> getList() {
-		return list;
-	}
-
-	public void setList(Set<Lists> list) {
-		this.list = list;
-	}
+//	public Set<Lists> getList() {
+//		return list;
+//	}
+//
+//	public void setList(Set<Lists> list) {
+//		this.list = list;
+//	}
 
 	public List<Meaning> getMeanings() {
 		return meanings;

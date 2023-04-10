@@ -62,17 +62,25 @@ public class UserService {
 		}
 	}
 	
-//	public void subscribeList(Lists list, User user){
-//		Set<Lists> subscribedList = user.getSubscribedList();
-//		subscribedList.add(list);
-//		user.setSubscribedList(subscribedList);
-//	}
-//	
-//	public void unsubscribeList(Lists list, User user){
-//		Set<Lists> subscribedList = user.getSubscribedList();
-//		subscribedList.remove(list);
-//		user.setSubscribedList(subscribedList);
-//	}
+	public void subscribeList(Lists list, User user){
+		Optional<User> oldUserOptional = userRepo.findByUserID(user.getUserID());
+		try {
+			User oldUser = oldUserOptional.get();
+			Set<Lists> subscribedList = oldUser.getSubscribedList();
+			subscribedList.add(list);
+			oldUser.setSubscribedList(subscribedList);
+			userRepo.save(oldUser);
+		} catch(Exception e) {
+			System.out.println("failed to subscribe list " + list.getListID() + "to user" + user.getUserID());
+		}
+		
+	}
+	
+	public void unsubscribeList(Lists list, User user){
+		Set<Lists> subscribedList = user.getSubscribedList();
+		subscribedList.remove(list);
+		user.setSubscribedList(subscribedList);
+	}
 	
 	public void updateProfile(User updatedUser) {
 		User user = userRepo.findById(updatedUser.getUserID()).get();

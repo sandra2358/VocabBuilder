@@ -37,33 +37,26 @@ public class ListsService {
 	public void addList(Lists list){
 		listsRepo.save(list);
 		User creator = list.getCreator();
-		creator.addCreatedList(list);
+//		creator.addCreatedList(list);
 	}
 
 
-	public Set<Word> findWords(Lists list){
-		return list.getWords();
-	}
-	
-	  
-	public long findNumWords(Lists list){
-		return list.getWords().size();
-	}
 	
 	  
 	// delete word if the word doesn't exist in other lists
 	public void deleteWordFromList(Word word,Lists list){
-	    list.removeWordFromList(word);
-	    List<Meaning> meaningList = word.getMeanings();
-	    if (word.getList().size() == 0) {
-	    	wordRepo.delete(word);
-	    }
-	    for (Meaning meaning: meaningList) {
-	    	meaning.removeWordFromMeaning(word);
-	    	if(meaning.getWords().size() == 0) {
-	    		meaningRepo.delete(meaning);
-	    	}
-	    }
+//	    list.removeWordFromList(word);
+	    wordRepo.delete(word);
+//	    List<Meaning> meaningList = word.getMeanings();
+//	    if (word.getList().size() == 0) {
+//	    	wordRepo.delete(word);
+//	    }
+//	    for (Meaning meaning: meaningList) {
+//	    	meaning.removeWordFromMeaning(word);
+//	    	if(meaning.getWords().size() == 0) {
+//	    		meaningRepo.delete(meaning);
+//	    	}
+//	    }
 	}
 	
 	public List<Word> findSameWord(String word){

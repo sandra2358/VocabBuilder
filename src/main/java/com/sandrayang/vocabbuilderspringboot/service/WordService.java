@@ -1,6 +1,9 @@
 package com.sandrayang.vocabbuilderspringboot.service;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,10 +31,27 @@ public class WordService {
 	
 	
 	public void addWord(Word word,Lists list){
-		// add word to Word
+		Optional<Lists> oldListOptional = listsRepo.findByListID(list.getListID());
 		wordRepo.save(word);
-		list.addWordToList(word);
-		word.addListToWord(list);
+		Lists oldList = oldListOptional.get();
+		try {
+			
+			Set<Word> oldWords = oldList.getWords();
+			oldWords.add(word);
+			oldList.setWords(oldWords);
+			listsRepo.save(oldList);
+		} catch(NoSuchElementException noe) {
+			System.out.println("Cannot find list");
+//		} catch(SQLException sqle) {
+//			Throwable cause = sqle.getCause();
+//			if (cause instanceof SQLIntegrityConstraintViolationException) {
+//				System.out.println("sql problem");
+//			}
+//			throw sqle;
+		}catch(Exception e) {
+			System.out.println("failed to save word" + word.getWordID() +word.getWord() + "to list" + list.getListID()+ list.getListName());
+		}
+		
 	};
 	  
 	
@@ -52,17 +72,18 @@ public class WordService {
 	}
 	
 	public Word updateWord (Word oldWord, Word newWord, Lists list) {
-		if (oldWord.getList().size() == 1) {
-			oldWord.setArticle(newWord.getArticle());
-			oldWord.setPartOfSpeech(newWord.getPartOfSpeech());
-			oldWord.setMeanings(newWord.getMeanings());
-			oldWord.setWord(newWord.getWord());
+		Optional<Word> wordOptional = wordRepo.findById(oldWord.getWordID());
+		try {
+			Word word = wordOptional.get();
+			word.setArticle(newWord.getArticle());
+			word.setPartOfSpeech(newWord.getPartOfSpeech());
+			word.setMeanings(newWord.getMeanings());
+			word.setWord(newWord.getWord());
 			wordRepo.save(oldWord);
-		} else if (oldWord.getList().size() > 1) {
-			oldWord.removeListFromWord(list);
-			wordRepo.save(newWord);
-			addWord(newWord,list);
+		} catch(Exception e) {
+			
 		}
+		
 		return oldWord;
 		
 	}

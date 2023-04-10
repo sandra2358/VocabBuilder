@@ -19,14 +19,14 @@ public class MeaningService {
 	public void addMeaning(Meaning meaning, Word word){
 		try {
 			meaningRepo.save(meaning);
-			meaning.addWordToMeaning(word);
+//			meaning.addWordToMeaning(word);
 			word.addMeaningToWord(meaning);
 		}
 		catch(Exception e){};
 	}
 	
 	public void deleteMeaning(Meaning meaning) {
-		meaning.getWords().forEach(word -> word.removeMeaningFromWord(meaning));
+//		meaning.getWords().forEach(word -> word.removeMeaningFromWord(meaning));
 		meaningRepo.delete(meaning);
 		
 	}

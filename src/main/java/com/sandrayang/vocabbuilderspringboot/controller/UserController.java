@@ -83,10 +83,9 @@ public class UserController {
 	
 	
 	@GetMapping("/{userID}")
-	public ResponseEntity<UserDto> getUserHome(@PathVariable("userID") long userID) {
+	public ResponseEntity<User> getUserHome(@PathVariable("userID") long userID) {
 		User user = userService.findUserByUserID(userID);
-		System.out.println(user.getUsername());
-		return ResponseEntity.ok().body(mapper.map(user,UserDto.class));
+		return ResponseEntity.ok().body(user);
 	}
 	
 	

@@ -1,23 +1,24 @@
 package com.sandrayang.vocabbuilderspringboot.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-public class Lists {
+public class Lists implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +26,7 @@ public class Lists {
 	
 	private String listName;
 	  
-	@ManyToMany
-	@JoinTable(name="lists_word", joinColumns = @JoinColumn(name = "listID"), inverseJoinColumns = @JoinColumn(name="wordID"))
+	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Word> words = new HashSet<Word>();
 	  
 	@CreationTimestamp
@@ -40,13 +40,6 @@ public class Lists {
 //	@NonNull
 	private User creator;
 	
-	public void addWordToList(Word word) {
-		this.words.add(word);
-	}
-	
-	public void removeWordFromList(Word word) {
-		this.words.remove(word);
-	}
 	
 	public Lists() {
 		super();
